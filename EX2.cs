@@ -1,61 +1,48 @@
-﻿using System;
+using System;
 
 class Program
 {
     static void Main()
     {
-        // Solicita ao usuário para entrar com o primeiro valor positivo
-        Console.Write("Digite o primeiro valor (deve ser positivo): ");
-        double primeiroValor = ObterValorPositivo();
+        double primeiro = PedeValorPositivo("Me diga o primeiro valor (tem que ser positivo): ");
+        double segundo = PedeValorMaiorQue(primeiro);
 
-        // Solicita ao usuário para entrar com o segundo valor maior que o primeiro
-        Console.Write("Digite o segundo valor (deve ser maior que o primeiro): ");
-        double segundoValor = ObterSegundoValor(primeiroValor);
-
-        // Exibe os valores válidos inseridos
-        Console.WriteLine($"Primeiro valor: {primeiroValor}");
-        Console.WriteLine($"Segundo valor: {segundoValor}");
+        // Mostra os valores válidos que foram inseridos
+        Console.WriteLine($"O primeiro valor é: {primeiro}");
+        Console.WriteLine($"O segundo valor é: {segundo}");
     }
 
-    // Função para obter um valor positivo digitado pelo usuário
-    static double ObterValorPositivo()
+    static double PedeValorPositivo(string mensagem)
     {
         double valor;
-        do
-        {
-            // Lê a entrada do usuário e tenta converter para double
-            string input = Console.ReadLine();
-            bool conversaoSucesso = double.TryParse(input, out valor);
 
-            // Verifica se a conversão foi bem-sucedida e se o valor é positivo
-            if (!conversaoSucesso || valor <= 0)
+        while (true)
+        {
+            Console.Write(mensagem);
+            if (double.TryParse(Console.ReadLine(), out valor) && valor > 0)
             {
-                Console.WriteLine("Valor inválido. Por favor, digite um valor positivo.");
-                Console.Write("Digite novamente: ");
+                break;
             }
-        } while (valor <= 0);
+            Console.WriteLine("Esse valor não está certo. Tente novamente com um valor positivo.");
+        }
 
         return valor;
     }
 
-    // Função para obter o segundo valor maior que o primeiro digitado pelo usuário
-    static double ObterSegundoValor(double primeiroValor)
+    static double PedeValorMaiorQue(double primeiroValor)
     {
-        double segundoValor;
-        do
+        double valor;
+
+        while (true)
         {
-            // Lê a entrada do usuário e tenta converter para double
-            string input = Console.ReadLine();
-            bool conversaoSucesso = double.TryParse(input, out segundoValor);
-
-            // Verifica se a conversão foi bem-sucedida e se o segundo valor é maior que o primeiro
-            if (!conversaoSucesso || segundoValor <= primeiroValor)
+            Console.Write("Agora, digite o segundo valor (tem que ser maior que o primeiro): ");
+            if (double.TryParse(Console.ReadLine(), out valor) && valor > primeiroValor)
             {
-                Console.WriteLine("Valor inválido. O segundo valor deve ser maior que o primeiro.");
-                Console.Write("Digite novamente: ");
+                break;
             }
-        } while (segundoValor <= primeiroValor);
+            Console.WriteLine("Esse valor não está certo. O segundo valor precisa ser maior que o primeiro.");
+        }
 
-        return segundoValor;
+        return valor;
     }
 }
