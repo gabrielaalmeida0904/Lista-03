@@ -1,34 +1,32 @@
-﻿using System;
+using System;
 
 class Program
 {
     static void Main()
     {
+        string sexo = PedeSexo();
+
+        // Mostra o sexo que foi inserido
+        Console.WriteLine($"Sexo informado: {sexo}");
+    }
+
+    static string PedeSexo()
+    {
         string sexo;
 
-        // Loop para garantir que o usuário insira um sexo válido ("F" ou "M")
         while (true)
         {
-            // Solicita ao usuário para inserir o sexo
-            Console.Write("Digite o sexo (F para feminino, M para masculino): ");
+            Console.Write("Qual seu sexo? (Digite 'F' para feminino ou 'M' para masculino): ");
+            sexo = Console.ReadLine().Trim().ToUpper();
 
-            // Lê a entrada do usuário e converte para maiúsculo para facilitar a comparação
-            sexo = Console.ReadLine().ToUpper();
-
-            // Verifica se o sexo inserido é válido
             if (sexo == "F" || sexo == "M")
             {
-                // Se for válido, sai do loop
-                break;
+                return sexo;
             }
             else
             {
-                // Se não for válido, exibe mensagem de erro e continua no loop
-                Console.WriteLine("Entrada inválida. Por favor, digite 'F' para feminino ou 'M' para masculino.");
+                Console.WriteLine("Opção inválida. Por favor, escolha 'F' para feminino ou 'M' para masculino.");
             }
         }
-
-        // Exibe o sexo válido inserido
-        Console.WriteLine($"Sexo inserido: {sexo}");
     }
 }
